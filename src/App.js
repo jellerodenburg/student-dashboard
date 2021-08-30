@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import Header from './components/Header'
+import GraphContainer from './components/GraphContainer'
+import Footer from './components/Footer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedStudent: 'All students (average)',
+      showDifficulty: true,
+      showEnjoyment: true
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(event) {
+    const { name, value, type, checked } = event.target
+    type === "checkbox" ?
+      this.setState({ [name]: checked })
+      :
+      this.setState({ [name]: value })
+  }
+
+  render() {
+    return (
+      <div>
+        <Header
+          handleChange={this.handleChange}
+          data={this.state}
+        />
+        <GraphContainer
+          data={this.state}
+        />
+        <Footer />
+      </div >
+    )
+  }
 }
 
-export default App;
+export default App
