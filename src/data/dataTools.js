@@ -23,7 +23,7 @@ const createAverageRatings = () => {
     let newArray = []
     assignments.forEach(assignment => {
         let assignmentAverageObject = {
-            [studentName]: "All students (average)",
+            [studentName]: "All_Students_Average",
             [assignmentId]: assignment,
             [difficultyRating]: averageBy(WincData, assignment, difficultyRating),
             [enjoymentRating]: averageBy(WincData, assignment, enjoymentRating)

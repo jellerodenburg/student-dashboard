@@ -7,15 +7,16 @@ const difficultyRating = 'Hoe moeilijk vond je deze opdracht?'
 const enjoymentRating = 'Hoe leuk vond je deze opdracht?'
 const studentName = 'Wie ben je?'
 
-function Graph(props) {
+function Chart(props) {
 
   // Filter the data to be displayed in one chart
   // using props assignmentSection and selectedStudent
   const graphData = totalAssignmentsDataWithAverage.filter(el => {
+
     // If-statement is used to group assignment names starting with: W4, W5, W6, SRUM
     // because these consist of a small number of assignments (compared to W1, W2, W3)
     if (props.assignmentSection.startsWith("W4+")) {
-      return el[studentName].startsWith(props.data.selectedStudent) &&
+      return el[studentName].startsWith(props.name) &&
         (
           el[assignmentId].startsWith('W4') ||
           el[assignmentId].startsWith('W5') ||
@@ -23,20 +24,24 @@ function Graph(props) {
           el[assignmentId].startsWith('SCRUM')
         )
     } else {
-      return el[studentName].startsWith(props.data.selectedStudent) &&
+      return el[studentName].startsWith(props.name) &&
         el[assignmentId].startsWith(props.assignmentSection)
+
     }
   })
 
   return (
-    <div className="graph-div">
+    <div className="chart-div">
+
       <h3>{props.assignmentSection}</h3>
+
       <VictoryChart
         padding={{ top: 5, bottom: 30, left: 20, right: 10 }}
         domainPadding={{ x: 10, y: 0 }}
         theme={VictoryTheme.material}
         height={80}
       >
+
         <VictoryAxis
           // In Project assignment names replace " - " for a line break
           tickFormat={(t) => t.replace(/\s-\s/g, "\n")}
@@ -44,6 +49,7 @@ function Graph(props) {
             tickLabels: { fill: "white", fontSize: 4.5, padding: 5 }
           }}
         />
+
         <VictoryAxis
           dependentAxis
           tickValues={[1, 2, 3, 4, 5]}
@@ -51,7 +57,9 @@ function Graph(props) {
             tickLabels: { fill: "white", fontSize: 4.5, padding: 5 }
           }}
         />
+
         <VictoryGroup offset={5} style={{ data: { width: 5 } }}>
+
           <VictoryStack>
             <VictoryBar
               style={{
@@ -66,6 +74,7 @@ function Graph(props) {
               y={difficultyRating}
             />
           </VictoryStack>
+
           <VictoryStack>
             <VictoryBar
               style={{
@@ -80,10 +89,12 @@ function Graph(props) {
               y={enjoymentRating}
             />
           </VictoryStack>
+
         </VictoryGroup>
+
       </VictoryChart>
     </div >
   )
 }
 
-export default Graph
+export default Chart

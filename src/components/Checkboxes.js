@@ -1,9 +1,8 @@
 import React from 'react'
-import StudentSelect from './StudentSelect'
 
-function Filters(props) {
+function Checkboxes(props) {
     return (
-        <div id="filters">
+        <div id="checkbox-container">
 
             <label id="difficulty-checkbox-label">
                 <input
@@ -23,12 +22,8 @@ function Filters(props) {
                 /> Enjoyment
             </label>
 
-            <div>
-                <StudentSelect students={props.students} handleChange={props.handleChange} />
-            </div>
-
         </div>
     )
 }
 
-export default Filters
+export default Checkboxes
